@@ -1,6 +1,7 @@
 {
   "expo": {
-    "name": "recipeit",
+    "name": "RecipeIt",
+    "scheme": "recipeit",
     "slug": "recipeit",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -31,6 +32,9 @@
       "eas": {
         "projectId": "deffb747-3ef1-425a-8aea-c793c4d312b8"
       }
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
