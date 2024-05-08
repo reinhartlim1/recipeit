@@ -14,6 +14,9 @@ module.exports = {
         red: {
           DEFAULT: "#DD3131",
         },
+        gray: {
+          100: "#A6A6A6"
+        }
       },
       fontFamily: {
         pthin: ["Poppins-Thin", "sans-serif"],

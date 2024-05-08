@@ -1,12 +1,15 @@
-import { Text, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { Text, TouchableOpacity, Image, View } from "react-native";
+import React from "react";
 
-const CustomButton = () => {
+const CustomButton = ({ text, handlePress, backgroundColor, textColor }) => {
   return (
-    <TouchableOpacity className={`mt-40 bg-orange rounded-full min-h-[44px] justify-center items-center w-4/5`}>
-      <Text className="font-psemibold text-white">Selesai</Text>
+    <TouchableOpacity
+      onPress={handlePress}
+      className={`${backgroundColor} rounded-[15px] min-h-[44px] justify-center items-center`}
+    >
+      <Text className={`font-psemibold ${textColor}`}>{text}</Text>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
-export default CustomButton
+export default CustomButton;

@@ -1,8 +1,8 @@
-import { View, Text, FlatList, Animated } from "react-native";
+import { View, FlatList, Animated } from "react-native";
 import React, { useRef } from "react";
-import { icons, images } from "../constants";
-import SlideItem from "./SlideItem";
-import SliderPagination from "./SliderPagination";
+import { images } from "../constants";
+import CarouselItems from "./CarouselItems";
+import CarouselPagination from "./CarouselPagination";
 
 const data = [
   {
@@ -26,7 +26,7 @@ const data = [
   },
 ];
 
-const Slider = () => {
+const Carousel = ({ handlePress }) => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const handleOnScroll = (event) => {
     Animated.event(
@@ -45,11 +45,11 @@ const Slider = () => {
     )(event);
   };
   return (
-    <View className="bg-blue">
+    <View>
       <FlatList
-        className=""
+        className="h-screen"
         data={data}
-        renderItem={({ item }) => <SlideItem item={item} />}
+        renderItem={({ item }) => <CarouselItems item={item} handlePress={handlePress} />}
         horizontal
         pagingEnabled
         snapToAlignment="center"
@@ -57,9 +57,9 @@ const Slider = () => {
         showsHorizontalScrollIndicator={false}
         onScroll={handleOnScroll}
       />
-      <SliderPagination data={data} scrollX={scrollX} />
+      <CarouselPagination data={data} scrollX={scrollX} />
     </View>
   );
 };
 
-export default Slider;
+export default Carousel;

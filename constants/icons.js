@@ -16,6 +16,10 @@ import Profile from "../assets/icons/profile.png";
 import Settings from "../assets/icons/settings.png";
 import Time from "../assets/icons/time.png";
 import User from "../assets/icons/user.png";
+import Logo from "../assets/recipeit_icon.png"
+import ShowPassword from "../assets/icons/showpassword.png"
+import Google from "../assets/icons/google.png"
+import Facebook from "../assets/icons/facebook.png"
 
 export default {
     Back,
@@ -26,6 +30,7 @@ export default {
     Favorite,
     Filter,
     Home,
+    Logo,
     LogOut,
     MainIngredient,
     MealPlan,
@@ -36,4 +41,7 @@ export default {
     Settings,
     Time,
     User,
+    ShowPassword,
+    Google,
+    Facebook
 }

@@ -1,14 +1,15 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Image, View, Text } from "react-native";
 import React from "react";
-import { icons, images } from "../constants";
+import { images } from "../constants";
 import { StatusBar } from "expo-status-bar";
-import Slider from "../components/Slider";
+import Carousel from "../components/Carousel";
+import { router, Link } from "expo-router"
 
 const Onboarding = () => {
   return (
     <SafeAreaView>
-      <StatusBar style="light" />
+      {/* <StatusBar style="light" /> */}
 
       <View className="h-screen mt-20">
         <View className="items-center">
@@ -17,7 +18,7 @@ const Onboarding = () => {
             className="w-56 h-20"
             resizeMode="contain"
           />
-          <Slider />
+          <Carousel handlePress={() => router.push("/sign-in")} />
         </View>
       </View>
     </SafeAreaView>
