@@ -11,16 +11,16 @@ const Onboarding = () => {
     <SafeAreaView>
       {/* <StatusBar style="light" /> */}
 
-      <View className="h-screen mt-20">
+      <View className="mt-20">
         <View className="items-center">
           <Image
             source={images.TextLogo}
             className="w-56 h-20"
             resizeMode="contain"
           />
-          <Carousel handlePress={() => router.push("/sign-in")} />
         </View>
       </View>
+      <Carousel handlePress={() => router.push("/sign-in")} />
     </SafeAreaView>
   );
 };

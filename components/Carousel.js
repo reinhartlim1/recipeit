@@ -47,7 +47,6 @@ const Carousel = ({ handlePress }) => {
   return (
     <View>
       <FlatList
-        className="h-screen"
         data={data}
         renderItem={({ item }) => <CarouselItems item={item} handlePress={handlePress} />}
         horizontal

@@ -19,9 +19,9 @@ const TabIcon = ({ icon, color, name, focused }) => {
 const CustomTabButton = ({ children, onPress }) => (
   <TouchableOpacity
     onPress={onPress}
-    className="justify-center items-center -top-10"
+    className="justify-center items-center -top-8"
   >
-    <View className="rounded-full h-[60px] w-[60px] bg-green">{children}</View>
+    <View className="rounded-full h-[70px] w-[70px] bg-green">{children}</View>
   </TouchableOpacity>
 );
 

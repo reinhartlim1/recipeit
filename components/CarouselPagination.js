@@ -5,7 +5,7 @@ const {width} = Dimensions.get('screen');
 
 const CarouselPagination = ({ data, scrollX, index }) => {
   return (
-    <View className="flex-row absolute bottom-96 items-center justify-center w-full">
+    <View className="flex-row absolute bottom-[80px] items-center justify-center w-full">
       {data.map((_, idx) => {
         const inputRange = [(idx - 1) * width, idx * width, (idx + 1) * width];
 
