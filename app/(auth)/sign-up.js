@@ -42,9 +42,9 @@ const SignUp = () => {
           </View>
 
           <View className="flex flex-row justify-center my-16">
-            <Text className="opacity-50">Belum punya akun?</Text>
-            <Link href="/sign-up">
-              <Text className="text-green"> Sign Up</Text>
+            <Text className="opacity-50">Sudah punya akun?</Text>
+            <Link href="/sign-in">
+              <Text className="text-green"> Sign In</Text>
             </Link>
           </View>
         </View>
