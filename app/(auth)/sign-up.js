@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, Image } from "react-native";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { icons } from "../../constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
@@ -34,7 +34,7 @@ const SignUp = () => {
             <View className="mt-9">
               <CustomButton
                 text="Register"
-                handlePress={() => {}}
+                handlePress={() => router.push("/home")}
                 backgroundColor="bg-green"
                 textColor="text-white"
               />

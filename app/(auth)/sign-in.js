@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, Image } from "react-native";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { icons } from "../../constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
@@ -19,14 +19,14 @@ const SignIn = () => {
         <Text className="mt-2 font-pregular text-base text-gray-100">
           Selamat datang kembali di RecipeIt
         </Text>
-        
+
         <View className="w-full mt-6">
           <FormField title="Email" placeholder="Enter your email" />
           <FormField title="Password" placeholder="Enter your password" />
           <View className="mt-9">
             <CustomButton
               text="Login"
-              handlePress={() => {}}
+              handlePress={() => router.push("/home")}
               backgroundColor="bg-green"
               textColor="text-white"
             />
