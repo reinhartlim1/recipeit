@@ -20,6 +20,11 @@ import Logo from "../assets/recipeit_icon.png"
 import ShowPassword from "../assets/icons/showpassword.png"
 import Google from "../assets/icons/google.png"
 import Facebook from "../assets/icons/facebook.png"
+import Search from "../assets/icons/search.png"
+import Rank from "../assets/icons/rank.png"
+import Soup from "../assets/icons/soup.png"
+import Star from "../assets/icons/star.png"
+import RightChevron from "../assets/icons/rightchevron.png"
 
 export default {
     Back,
@@ -43,5 +48,10 @@ export default {
     User,
     ShowPassword,
     Google,
-    Facebook
+    Facebook,
+    Search,
+    Rank,
+    Soup,
+    Star,
+    RightChevron
 }

@@ -7,6 +7,7 @@ import LogOut from "../assets/images/logout.png";
 import MealPlan from "../assets/images/mealplan.png";
 import Succeed from "../assets/images/succeed.png";
 import TrashCan from "../assets/images/trashcan.png";
+import Dummy from "../assets/images/dummy.png";
 
 export default {
     Ask,
@@ -18,4 +19,5 @@ export default {
     MealPlan,
     Succeed,
     TrashCan,
+    Dummy,
 }
