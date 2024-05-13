@@ -15,6 +15,7 @@ import SearchBar from "../../components/SearchBar";
 import ScrollCategories from "../../components/ScrollCategories";
 import RecipeCard from "../../components/RecipeCard";
 import CommunityCard from "../../components/CommunityCard";
+import Community from "../../components/Community";
 
 const { width, height } = Dimensions.get("window");
 
@@ -89,28 +90,7 @@ const Home = () => {
 
         {/* Komunitas */}
         <View className="mt-[15px]">
-          <View
-            className="mt-[10px] flex flex-row justify-between
-           items-center"
-          >
-            <View>
-              <Text className="font-psemibold text-base">Komunitas</Text>
-            </View>
-
-            <TouchableOpacity className="flex flex-row items-center">
-              <Text className="text-[12px]">Lihat Semua</Text>
-              <Image
-                source={icons.RightChevron}
-                resizeMode="contain"
-                className="w-5 h-5 mt-0.5"
-              />
-            </TouchableOpacity>
-          </View>
-
-          <View className="mt-[10px] flex flex-row justify-between">
-            <CommunityCard />
-            <CommunityCard />
-          </View>
+          <Community />
         </View>
 
         <View className="h-40"></View>

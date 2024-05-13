@@ -5,7 +5,7 @@ const CustomButton = ({ text, handlePress, backgroundColor, textColor }) => {
   return (
     <TouchableOpacity
       onPress={handlePress}
-      className={`${backgroundColor} rounded-[15px] min-h-[44px] justify-center items-center`}
+      className={`${backgroundColor} rounded-[10px] min-h-[44px] justify-center items-center`}
     >
       <Text className={`font-psemibold ${textColor}`}>{text}</Text>
     </TouchableOpacity>
