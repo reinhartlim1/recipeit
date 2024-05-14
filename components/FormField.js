@@ -11,6 +11,8 @@ const FormField = ({ title, placeholder }) => {
         <TextInput
           className="mt-1 flex-1"
           placeholder={placeholder}
+          autoCapitalize="none"
+          autoCorrect={false}
           secureTextEntry={
             (title == "Password" || title == "Konfirmasi Password") &&
             !showPassword
