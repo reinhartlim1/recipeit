@@ -1,6 +1,7 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import CustomButton from "./CustomButton";
 import { icons, images } from "../constants";
+import { router } from "expo-router";
 
 const RecipeCard = ({ name, ingCount, time }) => {
   return (
@@ -25,7 +26,7 @@ const RecipeCard = ({ name, ingCount, time }) => {
       <Text className="font-pmedium text-green text-[12px]">{time} menit</Text>
       
       <View className="h-[30px] w-[130px] mt-[10px]"> 
-        <CustomButton text="Cek Resep" backgroundColor="bg-orange" textColor="text-white" style={{}} />
+        <CustomButton handlePress={() => router.push("/(tabs)/detail/index")} text="Cek Resep" backgroundColor="bg-orange" textColor="text-white" style={{}} />
       </View>
     </View>
   );

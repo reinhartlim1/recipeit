@@ -1,12 +1,36 @@
-import { View, Text, ScrollView, Image } from "react-native";
+import { View, Text, Image, Alert } from "react-native";
 import { Link, router } from "expo-router";
 import { icons } from "../../constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import AuthButton from "../../components/AuthButton";
+import { auth } from "../firebase/firebaseconfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
 
 const SignIn = () => {
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleSignIn = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        form.email,
+        form.password
+      );
+      const user = userCredential.user;
+      console.log("User is signed in 2")
+      router.replace("/home");
+    } catch (error) {
+      console.log(error.message);
+      Alert.alert("Sign-in error", error.message);
+    }
+  };
+
   return (
     <SafeAreaView>
       <View className="items-center justify-center mx-8">
@@ -21,12 +45,22 @@ const SignIn = () => {
         </Text>
 
         <View className="w-full mt-6">
-          <FormField title="Email" placeholder="Enter your email" />
-          <FormField title="Password" placeholder="Enter your password" />
+          <FormField
+            title="Email"
+            placeholder="Enter your email"
+            value={form.email}
+            handleChangeText={(e) => setForm({ ...form, email: e })}
+          />
+          <FormField
+            title="Password"
+            placeholder="Enter your password"
+            value={form.password}
+            handleChangeText={(e) => setForm({ ...form, password: e })}
+          />
           <View className="mt-9">
             <CustomButton
               text="Login"
-              handlePress={() => router.push("/home")}
+              handlePress={handleSignIn}
               backgroundColor="bg-green"
               textColor="text-white"
             />

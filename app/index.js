@@ -4,9 +4,15 @@ import React from "react";
 import { images } from "../constants";
 import { StatusBar } from "expo-status-bar";
 import Carousel from "../components/Carousel";
-import { router, Link } from "expo-router"
+import { router, Redirect } from "expo-router"
+import { useGlobalContext } from "./context/GlobalProvider";
 
 const Onboarding = () => {
+  const { isLogged, user } = useGlobalContext();
+  if (!isLogged) {
+    return <Redirect href="/sign-in" />;
+  }
+  
   return (
     <SafeAreaView>
       {/* <StatusBar style="light" /> */}

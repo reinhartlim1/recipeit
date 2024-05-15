@@ -1,11 +1,51 @@
-import { View, Text, ScrollView, Image } from "react-native";
+import { View, Text, ScrollView, Image, Alert } from "react-native";
 import { Link, router } from "expo-router";
 import { icons } from "../../constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
+import { auth } from "../firebase/firebaseconfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
 
 const SignUp = () => {
+  const [form, setForm] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const checkPassword = () => {
+    if (form.password !== form.confirmPassword) {
+      return false;
+    }
+    return true;
+  };
+
+  const handleSignUp = async () => {
+    if (checkPassword()) {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          form.email,
+          form.password
+        );
+        const user = userCredential.user;
+      } catch (error) {
+        console.log(error.message);
+        Alert.alert("Sign-up error", error.message);
+      }
+    } else {
+      Alert.alert(
+        "Sign-up error",
+        "Password and confirm password must be the same"
+      );
+    }
+  };
+
+  const createProfile = async () => {};
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -25,16 +65,28 @@ const SignUp = () => {
               title="Nama Lengkap"
               placeholder="Enter your full name"
             />
-            <FormField title="Email" placeholder="Enter your email" />
-            <FormField title="Password" placeholder="Enter your password" />
+            <FormField
+              title="Email"
+              placeholder="Enter your email"
+              value={form.email}
+              handleChangeText={(e) => setForm({ ...form, email: e })}
+            />
+            <FormField
+              title="Password"
+              placeholder="Enter your password"
+              value={form.password}
+              handleChangeText={(e) => setForm({ ...form, password: e })}
+            />
             <FormField
               title="Konfirmasi Password"
               placeholder="Enter password confirmation"
+              value={form.confirmPassword}
+              handleChangeText={(e) => setForm({ ...form, confirmPassword: e })}
             />
             <View className="mt-9">
               <CustomButton
                 text="Register"
-                handlePress={() => router.push("/home")}
+                handlePress={handleSignUp}
                 backgroundColor="bg-green"
                 textColor="text-white"
               />

@@ -1,39 +1,43 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native'
-import { images, icons } from '../constants'
+import { View, Text, TouchableOpacity, Image } from "react-native";
+import { images, icons } from "../constants";
+import { auth } from "../app/firebase/firebaseconfig";
 
 const data = [
   {
     id: 1,
-    name: 'Profile',
+    name: "Profile",
     icon: icons.User,
   },
   {
     id: 2,
-    name: 'Preferensi',
+    name: "Preferensi",
     icon: icons.Preference,
   },
   {
     id: 3,
-    name: 'Digital Pantry',
+    name: "Digital Pantry",
     icon: icons.DigitalPantry,
   },
   {
     id: 4,
-    name: 'Pengaturan',
+    name: "Pengaturan",
     icon: icons.Settings,
   },
   {
     id: 5,
-    name: 'Log Out',
-    icon: icons.LogOut
-  }
-]
+    name: "Log Out",
+    icon: icons.LogOut,
+    handle: async () => {
+      await auth.signOut();
+    },
+  },
+];
 
 const ProfileNavigation = () => {
   return (
     <View>
       {data.map((item) => (
-        <TouchableOpacity key={item.id}>
+        <TouchableOpacity key={item.id} onPress={item.id == 5 ? item.handle : ""}>
           <View className="flex flex-row items-center justify-between py-4 border-b-[0.75px] border-b-[#D9D9D9]">
             <View className="flex flex-row items-center">
               <Image source={item.icon} className="w-[32px] h-[32px]" />
@@ -44,7 +48,7 @@ const ProfileNavigation = () => {
         </TouchableOpacity>
       ))}
     </View>
-  )
-}
+  );
+};
 
-export default ProfileNavigation
+export default ProfileNavigation;
