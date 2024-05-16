@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { onAuthStateChanged, getRea } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebaseconfig";
 
 const GlobalContext = createContext();
@@ -7,12 +7,13 @@ const GlobalContext = createContext();
 export const useGlobalContext = () => useContext(GlobalContext);
 
 const GlobalProvider = ({ children }) => {
-    
   const [isLogged, setIsLogged] = useState(false);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
+      console.log("Auth State Changed: ", user);
       if (user) {
         setIsLogged(true);
         setUser(user);
@@ -21,10 +22,13 @@ const GlobalProvider = ({ children }) => {
         setIsLogged(false);
       }
     });
+    setLoading(false);
   }, []);
 
   return (
-    <GlobalContext.Provider value={{ user, isLogged, setIsLogged, setUser }}>
+    <GlobalContext.Provider
+      value={{ user, isLogged, setIsLogged, setUser, loading }}
+    >
       {children}
     </GlobalContext.Provider>
   );

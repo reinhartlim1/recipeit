@@ -8,15 +8,12 @@ import { router, Redirect } from "expo-router"
 import { useGlobalContext } from "./context/GlobalProvider";
 
 const Onboarding = () => {
-  const { isLogged, user } = useGlobalContext();
-  if (!isLogged) {
-    return <Redirect href="/sign-in" />;
-  }
-  
+  const { loading, isLogged } = useGlobalContext();
+  if(!loading && isLogged) return <Redirect href="/home" />
+
   return (
     <SafeAreaView>
       {/* <StatusBar style="light" /> */}
-
       <View className="mt-20">
         <View className="items-center">
           <Image

@@ -3,7 +3,6 @@ import { getAuth, setPersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import Constants from "expo-constants";
 import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage"
-import { set } from "firebase/database";
 
 
 const firebaseConfig = {

@@ -1,6 +1,9 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { images, icons } from "../constants";
 import { auth } from "../app/firebase/firebaseconfig";
+import { useGlobalContext } from "../app/context/GlobalProvider";
+import { signOut } from "firebase/auth";
+import { router } from "expo-router";
 
 const data = [
   {
@@ -27,17 +30,29 @@ const data = [
     id: 5,
     name: "Log Out",
     icon: icons.LogOut,
-    handle: async () => {
-      await auth.signOut();
-    },
   },
 ];
 
 const ProfileNavigation = () => {
+  const { isLogged, setIsLogged, user, setUser } = useGlobalContext();
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        setIsLogged(false);
+        setUser(null);
+        console.log("Sign out success");
+        console.log(isLogged);
+        console.log(user);
+        router.replace("/sign-in")
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   return (
     <View>
       {data.map((item) => (
-        <TouchableOpacity key={item.id} onPress={item.id == 5 ? item.handle : ""}>
+        <TouchableOpacity key={item.id} onPress={item.id == 5 ? handleSignOut : ""}>
           <View className="flex flex-row items-center justify-between py-4 border-b-[0.75px] border-b-[#D9D9D9]">
             <View className="flex flex-row items-center">
               <Image source={item.icon} className="w-[32px] h-[32px]" />
