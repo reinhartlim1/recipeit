@@ -7,7 +7,7 @@ import {
   Dimensions,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { router } from "expo-router";
 import { icons } from "../../constants";
 import CustomButton from "../../components/CustomButton";
@@ -16,10 +16,33 @@ import ScrollCategories from "../../components/ScrollCategories";
 import RecipeCard from "../../components/RecipeCard";
 import CommunityCard from "../../components/CommunityCard";
 import Community from "../../components/Community";
+import { collection, getDocs, query, limit, setDoc, addDoc } from "firebase/firestore";
+import { firestore } from "../firebase/firebaseconfig";
 
 const { width, height } = Dimensions.get("window");
 
 const Home = () => {
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+
+        const querySnapshot = await getDocs(
+          query(collection(firestore, "recipes"), limit(2))
+        );
+        const recipesArray = [];
+        querySnapshot.forEach((doc) => {
+          recipesArray.push(doc.data());
+        });
+        setRecipes(recipesArray);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchRecipes();
+  }, []);
+
   return (
     <SafeAreaView>
       <View className="h-[115px] bg-green">
@@ -79,12 +102,17 @@ const Home = () => {
           <Text className="font-psemibold text-base">List Recipe</Text>
           <View className="mt-[15px] flex flex-row justify-between">
             {/* Don't forget wrap component with view to let space-x work */}
-            <View>
-              <RecipeCard name="Nasi Goreng Petai" ingCount={4} time={12} />
-            </View>
-            <View>
-              <RecipeCard name="Nasi Goreng Petai" ingCount={4} time={12} />
-            </View>
+            {recipes.map((recipe, index) => (
+              <View key={index}>
+                <RecipeCard
+                  id={recipe.recipeId} 
+                  name={recipe.name} 
+                  ingCount={recipe.ingredients ? recipe.ingredients.length : 0} 
+                  time={recipe.time} 
+                  imageUrl={recipe.imageUrl}
+                />
+              </View>
+            ))}
           </View>
         </View>
 

@@ -2,14 +2,22 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import CustomButton from "./CustomButton";
 import { icons, images } from "../constants";
 import { router } from "expo-router";
+import {
+  addDoc,
+  doc,
+  setDoc,
+  serverTimestamp,
+  collection,
+} from "firebase/firestore";
+import { firestore } from "../app/firebase/firebaseconfig";
 
-const RecipeCard = ({ name, ingCount, time }) => {
+const RecipeCard = ({ id, name, ingCount, time, imageUrl }) => {
   return (
     <View>
       <Image
-        source={images.Dummy}
-        resizeMode="contain"
-        className="w-[155px] h-[100px]"
+        source={{uri: imageUrl}}
+        resizeMode="cover"
+        className="w-[155px] h-[100px] rounded-lg"
       />
       <View className="mt-2 flex flex-row space-x-[2px]">
         <Image source={icons.Star} resizeMode="contain" className="w-3 h-3" />
@@ -24,9 +32,15 @@ const RecipeCard = ({ name, ingCount, time }) => {
         {ingCount} bahan
       </Text>
       <Text className="font-pmedium text-green text-[12px]">{time} menit</Text>
-      
-      <View className="h-[30px] w-[130px] mt-[10px]"> 
-        <CustomButton handlePress={() => router.push("/(tabs)/detail/index")} text="Cek Resep" backgroundColor="bg-orange" textColor="text-white" style={{}} />
+
+      <View className="h-[30px] w-[130px] mt-[10px]">
+        <CustomButton
+          handlePress={() => router.push(`/detail/${id}`)}
+          text="Cek Resep"
+          backgroundColor="bg-orange"
+          textColor="text-white"
+          style={{}}
+        />
       </View>
     </View>
   );
