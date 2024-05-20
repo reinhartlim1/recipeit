@@ -23,7 +23,6 @@ const SignIn = () => {
         form.password
       );
       const user = userCredential.user;
-      console.log("User is signed in 2")
       router.replace("/home");
     } catch (error) {
       console.log(error.message);

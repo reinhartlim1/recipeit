@@ -4,8 +4,9 @@ import { icons } from "../../constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
-import { auth } from "../firebase/firebaseconfig";
+import { auth, firestore } from "../firebase/firebaseconfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 
 const SignUp = () => {
@@ -15,6 +16,18 @@ const SignUp = () => {
     password: "",
     confirmPassword: "",
   });
+
+  async function createUserProfile(user) {
+    try {
+      await setDoc(doc(firestore, "users", user.uid), {
+        fullName: form.fullName,
+        email: form.email,
+        createdAt: serverTimestamp(),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
   const checkPassword = () => {
     if (form.password !== form.confirmPassword) {
@@ -31,7 +44,11 @@ const SignUp = () => {
           form.email,
           form.password
         );
+        
         const user = userCredential.user;
+        createUserProfile(user);
+        router.replace("/home");
+
       } catch (error) {
         console.log(error.message);
         Alert.alert("Sign-up error", error.message);
@@ -64,6 +81,8 @@ const SignUp = () => {
             <FormField
               title="Nama Lengkap"
               placeholder="Enter your full name"
+              value={form.fullName}
+              handleChangeText={(e) => setForm({ ...form, fullName: e })}
             />
             <FormField
               title="Email"

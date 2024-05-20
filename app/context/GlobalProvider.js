@@ -13,7 +13,6 @@ const GlobalProvider = ({ children }) => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      console.log("Auth State Changed: ", user);
       if (user) {
         setIsLogged(true);
         setUser(user);
