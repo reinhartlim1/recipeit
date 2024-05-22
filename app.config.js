@@ -39,6 +39,6 @@ export default {
       appId: process.env.APP_ID,
       measurementId: process.env.MEASUREMENT_ID,
     },
-    plugins: ["expo-router"],
+    plugins: ["expo-router", "expo-image-picker", "expo-camera"],
   },
 };
