@@ -4,22 +4,17 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  Dimensions,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useEffect, useState } from "react";
-import { router } from "expo-router";
 import { icons } from "../../constants";
-import CustomButton from "../../components/CustomButton";
 import SearchBar from "../../components/SearchBar";
 import ScrollCategories from "../../components/ScrollCategories";
 import RecipeCard from "../../components/RecipeCard";
-import CommunityCard from "../../components/CommunityCard";
 import Community from "../../components/Community";
-import { collection, getDocs, query, limit, setDoc, addDoc } from "firebase/firestore";
+import { collection, getDocs, query, limit } from "firebase/firestore";
 import { firestore } from "../firebase/firebaseconfig";
 
-const { width, height } = Dimensions.get("window");
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);

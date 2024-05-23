@@ -23,6 +23,11 @@ const SignUp = () => {
         fullName: form.fullName,
         email: form.email,
         createdAt: serverTimestamp(),
+        alergi: "",
+        tujuanKesehatan: "",
+        riwayatPenyakit: "",
+        jenisMakananKesukaan: "",
+        makananDisukai: "",
       });
     } catch (error) {
       console.log(error.message);
@@ -44,11 +49,10 @@ const SignUp = () => {
           form.email,
           form.password
         );
-        
+
         const user = userCredential.user;
         createUserProfile(user);
         router.replace("/home");
-
       } catch (error) {
         console.log(error.message);
         Alert.alert("Sign-up error", error.message);
@@ -60,8 +64,6 @@ const SignUp = () => {
       );
     }
   };
-
-  const createProfile = async () => {};
 
   return (
     <SafeAreaView>

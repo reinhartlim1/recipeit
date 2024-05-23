@@ -7,12 +7,14 @@ import { doc, getDoc } from "firebase/firestore";
 import { icons } from "../../constants";
 import { router } from "expo-router";
 import CustomButton from "../../components/CustomButton";
+import QuantityModal from "../../components/QuantityModal";
 
 const RecipeDetail = () => {
   const { id } = useLocalSearchParams();
   const [recipe, setRecipe] = useState(null);
   const [selectedTab, setSelectedTab] = useState("nutrition");
   const [porsi, setPorsi] = useState(1);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -32,6 +34,11 @@ const RecipeDetail = () => {
     fetchRecipe();
   }, [id]);
 
+  const saveQuantity = () => {
+    setModalVisible(false);
+
+  };
+
   if (!recipe) {
     return (
       <SafeAreaView>
@@ -42,6 +49,7 @@ const RecipeDetail = () => {
 
   console.log(id);
   console.log(recipe);
+  console.log(modalVisible);
   return (
     <SafeAreaView>
       <View className="flex flex-row items-center justify-between p-4">
@@ -66,6 +74,7 @@ const RecipeDetail = () => {
               text="Ubah Porsi"
               backgroundColor="bg-orange"
               textColor="text-white"
+              handlePress={() => setModalVisible(true)}
             />
           </View>
           <View className="mt-3 flex flex-row space-x-[2px]">
@@ -219,17 +228,17 @@ const RecipeDetail = () => {
             {selectedTab === "nutrition" && (
               <View>
                 <Text className="mt-1">
-                  {`\u2022 ${recipe.nutrition.carbs*porsi}`}g Karbohidrat
+                  {`\u2022 ${recipe.nutrition.carbs * porsi}`}g Karbohidrat
                 </Text>
                 <Text className="mt-1">
-                  {`\u2022 ${recipe.nutrition.protein*porsi}`}g Protein
+                  {`\u2022 ${recipe.nutrition.protein * porsi}`}g Protein
                 </Text>
                 <Text className="mt-1">
-                  {`\u2022 ${recipe.nutrition.vegetarian_protein*porsi}`}g Protein
-                  Nabati
+                  {`\u2022 ${recipe.nutrition.vegetarian_protein * porsi}`}g
+                  Protein Nabati
                 </Text>
                 <Text className="mt-1">
-                  {`\u2022 ${recipe.nutrition.sugar*porsi}`}g Gula
+                  {`\u2022 ${recipe.nutrition.sugar * porsi}`}g Gula
                 </Text>
               </View>
             )}
@@ -237,7 +246,9 @@ const RecipeDetail = () => {
               <View>
                 {recipe.ingredients.map((ingredient, index) => (
                   <Text key={index} className="mt-1">
-                    {`\u2022 ${recipe.unitValue[index]*porsi} ${recipe.unit[index]} ${ingredient}`}
+                    {`\u2022 ${recipe.unitValue[index] * porsi} ${
+                      recipe.unit[index]
+                    } ${ingredient}`}
                   </Text>
                 ))}
               </View>
@@ -255,6 +266,13 @@ const RecipeDetail = () => {
         </View>
         <View className="mt-20"></View>
       </ScrollView>
+      <QuantityModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        quantity={porsi}
+        setQuantity={setPorsi}
+        saveQuantity={saveQuantity}
+      />
     </SafeAreaView>
   );
 };

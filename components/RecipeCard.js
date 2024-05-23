@@ -1,15 +1,7 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image } from "react-native";
 import CustomButton from "./CustomButton";
-import { icons, images } from "../constants";
+import { icons } from "../constants";
 import { router } from "expo-router";
-import {
-  addDoc,
-  doc,
-  setDoc,
-  serverTimestamp,
-  collection,
-} from "firebase/firestore";
-import { firestore } from "../app/firebase/firebaseconfig";
 
 const RecipeCard = ({ id, name, ingCount, time, imageUrl }) => {
   return (

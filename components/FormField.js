@@ -7,7 +7,7 @@ const FormField = ({ title, placeholder, value, handleChangeText, ...props }) =>
   return (
     <View className="mt-4">
       <Text className="font-pregular text-[13px]">{title}</Text>
-      <View className="w-full h-[55px] px-4 rounded-xl border border-gray-100 flex flex-row items-center">
+      <View className="mt-1 w-full h-[55px] px-4 rounded-xl border border-gray-100 flex flex-row items-center">
         <TextInput
           className="mt-1 flex-1"
           value={value}
