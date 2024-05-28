@@ -3,7 +3,7 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  Button,
+  Modal,
   Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -23,7 +23,7 @@ const AddIngredients = () => {
   const [image, setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [quantity, setQuantity] = useState("");
-  const [unit, setUnit] = useState("");
+  const [unit, setUnit] = useState("Mg");
   const [ingredient, setIngredient] = useState("");
 
   const pickImage = async () => {
@@ -79,7 +79,7 @@ const AddIngredients = () => {
       Alert.alert("Error uploading image", e.message);
     } finally {
       setUploading(false);
-      router.back();
+      router.replace("/digital-pantry");
     }
   };
 
