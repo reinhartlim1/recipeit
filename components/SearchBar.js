@@ -21,7 +21,7 @@ const SearchBar = ({ initialQuery }) => {
       </TouchableOpacity>
       <TextInput
         className="font-pregular flex-1 mt-0.5"
-        placeholder="Input bahan liat resep"
+        placeholder="Input bahan generate resep"
         placeholderTextColor="#808080"
         value={query}
         onChangeText={(text) => setQuery(text)}
