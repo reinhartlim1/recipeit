@@ -16,7 +16,7 @@ import { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { useGlobalContext } from "../context/GlobalProvider";
-import { collection, addDoc, doc, serverTimestamp } from "firebase/firestore";
+import { collection, setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Picker } from "@react-native-picker/picker";
 import IngredientInput from "../../components/IngredientInput";
@@ -114,10 +114,12 @@ const Recipe = () => {
       if (user) {
         const userDocRef = doc(firestore, "users", user.uid);
         const pantryCollectionRef = collection(userDocRef, "recipe");
+        const docRef = doc(pantryCollectionRef);
 
-        await addDoc(pantryCollectionRef, {
+        await setDoc(docRef, {
+          recipeId: docRef.id,
           creator: user.uid,
-          image: downloadURL,
+          imageUrl: downloadURL,
           recipetype: "Private",
           ingredients: ingredients,
           unitValue: quantities,
