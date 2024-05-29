@@ -7,7 +7,7 @@ const RecipeCard = ({ id, name, ingCount, time, imageUrl }) => {
   return (
     <View>
       <Image
-        source={{uri: imageUrl}}
+        source={{ uri: imageUrl }}
         resizeMode="cover"
         className="w-[155px] h-[100px] rounded-lg"
       />

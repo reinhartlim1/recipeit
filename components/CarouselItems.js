@@ -1,8 +1,7 @@
 import { View, Text, Image, Dimensions } from "react-native";
 import React from "react";
 import CustomButton from "./CustomButton";
-const { width, height } = Dimensions.get("screen");
-import CarouselPagination from "./CarouselPagination";
+const { width } = Dimensions.get("screen");
 
 const CarouselItems = ({ item, handlePress }) => {
   return (

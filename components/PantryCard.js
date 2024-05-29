@@ -1,6 +1,5 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { icons } from "../constants";
-import { images } from "../constants";
 
 const PantryCard = ({ imageURL, ingredient, quantity, unit, onEdit, onDelete }) => {
   return (

@@ -1,6 +1,7 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { Tabs, Redirect } from "expo-router";
 import { icons } from "../../constants";
+import { router } from "expo-router";
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
@@ -16,9 +17,13 @@ const TabIcon = ({ icon, color, name, focused }) => {
   );
 };
 
-const CustomTabButton = ({ children, onPress }) => (
+const handlePress = () => {
+  router.push("/recipe/addrecipe");
+}; 
+
+const CustomTabButton = ({ children }) => (
   <TouchableOpacity
-    onPress={onPress}
+    onPress={handlePress}
     className="justify-center items-center -top-8"
   >
     <View className="rounded-full h-[70px] w-[70px] bg-green">{children}</View>
@@ -33,6 +38,7 @@ const TabsLayout = () => {
           tabBarActiveTintColor: "#06A43C",
           tabBarInactiveTintColor: "#A6A6A6",
           tabBarShowLabel: false,
+
           tabBarStyle: {
             height: 73,
             borderTopColor: "#FFFFFF",

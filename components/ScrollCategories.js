@@ -39,10 +39,17 @@ const ScrollCategories = () => {
       alwaysBounceHorizontal={true}
     >
       {categories.map((category, index) => (
-        <TouchableOpacity key={index.toString()} onPress={() => {
-          setCategoryIndex({ index: index, category: categories[index] });
-        }}>
-          <View className={`flex flex-row px-[10px] h-10 border ${categoryIndex.index == index ? "border-green":"border-gray-100"} rounded-[5px] items-center justify-center`}>
+        <TouchableOpacity
+          key={index.toString()}
+          onPress={() => {
+            setCategoryIndex({ index: index, category: categories[index] });
+          }}
+        >
+          <View
+            className={`flex flex-row px-[10px] h-10 border ${
+              categoryIndex.index == index ? "border-green" : "border-gray-100"
+            } rounded-[5px] items-center justify-center`}
+          >
             <View className="h-5 w-5 mt-1">
               <Image
                 source={category.icon}

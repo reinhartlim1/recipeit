@@ -16,6 +16,7 @@ import { firestore } from "../firebase/firebaseconfig";
 import { collection, doc, getDocs, deleteDoc } from "firebase/firestore";
 import { useGlobalContext } from "../context/GlobalProvider";
 import PantryCard from "../../components/PantryCard";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const DigitalPantry = () => {
   const { user } = useGlobalContext();
@@ -90,10 +91,10 @@ const DigitalPantry = () => {
           Digital Pantry
         </Text>
       </View>
-      <ScrollView className="mt-10 mx-8">
+      <KeyboardAwareScrollView className="mt-10 mx-8">
         <View className="flex flex-wrap flex-row -mx-2">
           {pantry.map((item) => (
-            <View className="w-1/2 px-2 mb-4">
+            <View className="w-1/2 px-2 mb-4" key={item.id}>
               <PantryCard
                 key={item.id}
                 ingredient={item.ingredient}
@@ -112,7 +113,7 @@ const DigitalPantry = () => {
           textColor="text-white"
           handlePress={() => router.push("/add-ingredients")}
         />
-      </ScrollView>
+      </KeyboardAwareScrollView>
 
       <Modal
         animationType="slide"

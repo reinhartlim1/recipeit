@@ -46,10 +46,6 @@ const RecipeDetail = () => {
       </SafeAreaView>
     );
   }
-
-  console.log(id);
-  console.log(recipe);
-  console.log(modalVisible);
   return (
     <SafeAreaView>
       <View className="flex flex-row items-center justify-between p-4">

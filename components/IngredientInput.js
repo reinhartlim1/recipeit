@@ -1,5 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, Modal } from "react-native";
-import { useState } from "react";
+import { View, Text, TextInput } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
 const IngredientInput = ({
@@ -19,6 +18,7 @@ const IngredientInput = ({
           placeholder="Contoh: 1"
           value={quantity}
           onChangeText={setQuantity}
+          keyboardType="numeric"
         />
       </View>
       <View className="flex-1">
@@ -49,6 +49,7 @@ const IngredientInput = ({
           placeholder="Contoh: Ayam"
           value={ingredient}
           onChangeText={setIngredient}
+          maxLength={20}
         />
       </View>
     </View>

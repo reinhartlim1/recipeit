@@ -97,14 +97,6 @@ const AddIngredients = () => {
       <View className="mx-8">
         <View className="flex flex-row items-center justify-between mt-8">
           <Text className="font-bold text-lg">Foto Bahan</Text>
-
-          {/* <TouchableOpacity onPress={pickImage}>
-            <Image
-              source={icons.Camera}
-              resizeMode="contain"
-              className="h-8 w-8"
-            />
-          </TouchableOpacity> */}
         </View>
         <View className="h-0.5 mt-1 flex flex-row">
           <View className="bg-black opacity-20 flex-1"></View>
