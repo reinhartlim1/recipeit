@@ -92,10 +92,10 @@ const DigitalPantry = () => {
       </View>
       <KeyboardAwareScrollView className="mt-10 mx-8">
         <View className="flex flex-wrap flex-row -mx-2">
-          {pantry.map((item) => (
-            <View className="w-1/2 px-2 mb-4" key={item.id}>
+          {pantry.map((item, index) => (
+            <View className="w-1/2 px-2 mb-4" key={index}>
               <PantryCard
-                key={item.id}
+                key={index}
                 ingredient={item.ingredient}
                 quantity={item.quantity}
                 unit={item.unit}

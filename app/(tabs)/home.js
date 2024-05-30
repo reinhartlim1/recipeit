@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useEffect, useState } from "react";
 import { icons } from "../../constants";
@@ -14,7 +8,7 @@ import RecipeCard from "../../components/RecipeCard";
 import Community from "../../components/Community";
 import { collection, getDocs, query, limit } from "firebase/firestore";
 import { firestore } from "../firebase/firebaseconfig";
-
+import { router } from "expo-router";
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -22,7 +16,6 @@ const Home = () => {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-
         const querySnapshot = await getDocs(
           query(collection(firestore, "recipes"), limit(2))
         );
@@ -94,16 +87,32 @@ const Home = () => {
 
         {/* List Recipes */}
         <View className="mt-[15px]">
-          <Text className="font-psemibold text-base">List Recipe</Text>
+          <View
+            className="mt-[10px] flex flex-row justify-between
+           items-center"
+          >
+            <View>
+              <Text className="font-psemibold text-base">List Recipe</Text>
+            </View>
+
+            <TouchableOpacity className="flex flex-row items-center" onPress={() => router.push('/recipe/allrecipe')}>
+              <Text className="text-[12px]">Lihat lebih banyak</Text>
+              <Image
+                source={icons.RightChevron}
+                resizeMode="contain"
+                className="w-5 h-5 mt-0.5"
+              />
+            </TouchableOpacity>
+          </View>
           <View className="mt-[15px] flex flex-row justify-between">
             {/* Don't forget wrap component with view to let space-x work */}
             {recipes.map((recipe, index) => (
               <View key={index}>
                 <RecipeCard
-                  id={recipe.recipeId} 
-                  name={recipe.name} 
-                  ingCount={recipe.ingredients ? recipe.ingredients.length : 0} 
-                  time={recipe.time} 
+                  id={recipe.recipeId}
+                  name={recipe.name}
+                  ingCount={recipe.ingredients ? recipe.ingredients.length : 0}
+                  time={recipe.time}
                   imageUrl={recipe.imageUrl}
                 />
               </View>

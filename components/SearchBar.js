@@ -14,7 +14,7 @@ const SearchBar = ({ initialQuery }) => {
               "Missing Query",
               "Please input ingredients to search for recipes"
             );
-          router.push(`/(generate)/${query}`);
+          router.push(`/search/${query}`);
         }}
       >
         <Image source={icons.Search} resizeMode="contain" className="h-5 w-5" />

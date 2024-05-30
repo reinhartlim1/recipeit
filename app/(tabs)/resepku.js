@@ -92,10 +92,10 @@ const ResepKu = () => {
 
       <ScrollView>
         <View className="flex flex-wrap flex-row -mx-2">
-          {recipes.map((recipe) => (
-            <View className="w-1/2 px-2 mb-4" key={recipe.id}>
+          {recipes.map((recipe, index) => (
+            <View className="w-1/2 px-2 mb-4" key={index}>
               <RecipeCard
-                key={recipe.id}
+                key={index}
                 id={recipe.recipeId}
                 name={recipe.name}
                 ingCount={recipe.ingredients ? recipe.ingredients.length : 0}

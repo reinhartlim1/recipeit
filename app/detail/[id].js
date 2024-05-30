@@ -10,8 +10,46 @@ import CustomButton from "../../components/CustomButton";
 import QuantityModal from "../../components/QuantityModal";
 import { useGlobalContext } from "../context/GlobalProvider";
 
+const fractionToDecimal = (fraction) => {
+  const fractionMap = {
+    "1/8": 0.125,
+    "1/4": 0.25,
+    "1/3": 0.333,
+    "1/2": 0.5,
+    "2/3": 0.667,
+    "3/4": 0.75,
+  };
+
+  if (fractionMap[fraction]) {
+    return fractionMap[fraction];
+  }
+
+  if (!isNaN(fraction)) {
+    return parseFloat(fraction);
+  }
+
+  const [whole, frac] = fraction.split(" ");
+  if (frac) {
+    const [num, denom] = frac.split("/").map(Number);
+    return parseFloat(whole) + num / denom;
+  }
+
+  const [num, denom] = fraction.split("/").map(Number);
+  return num / denom;
+};
+
+const splitMeasure = (measure) => {
+  const parts = measure.split(" ");
+  if (parts.length === 2) {
+    return [fractionToDecimal(parts[0]), parts[1]];
+  }
+  const fraction = parts[0];
+  const unit = parts.slice(1).join(" ");
+  return [fractionToDecimal(fraction), unit];
+};
+
 const RecipeDetail = () => {
-  const { id, source } = useLocalSearchParams();
+  const { id, source, type } = useLocalSearchParams();
   const { user } = useGlobalContext();
   const [recipe, setRecipe] = useState(null);
   const [selectedTab, setSelectedTab] = useState("nutrition");
@@ -21,25 +59,73 @@ const RecipeDetail = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        if (source === "private") {
-          docRef = doc(firestore, "users", user.uid, "recipe", id);
-        } else {
-          docRef = doc(firestore, "recipes", id);
-        }
+        let docRef;
 
-        const docSnap = await getDoc(docRef);
+        if (type === "mealdb") {
+          // Fetch from MealDB API
+          const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+          const data = await response.json();
+          if (data.meals) {
+            const meal = data.meals[0];
+            const ingredients = [];
+            const unitValues = [];
+            const units = [];
 
-        if (docSnap.exists()) {
-          setRecipe(docSnap.data());
+            for (let i = 1; i <= 20; i++) {
+              const ingredient = meal[`strIngredient${i}`];
+              const measure = meal[`strMeasure${i}`];
+
+              if (ingredient && measure) {
+                const [value, unit] = splitMeasure(measure.trim());
+                ingredients.push(ingredient);
+                unitValues.push(value);
+                units.push(unit);
+              }
+            }
+
+            const tags = meal.strTags ? meal.strTags.split(",")[0] : "";
+
+            setRecipe({
+              name: meal.strMeal,
+              imageUrl: meal.strMealThumb,
+              time:60,
+              bahanUtama: meal.strCategory,
+              jenisMakanan: tags.charAt(0).toUpperCase() + tags.slice(1) || "",
+              tingkatKesulitan: "Medium", 
+              nutrition: {
+                carbs: Math.floor(Math.random() * 120),
+                protein: Math.floor(Math.random() * 50),
+                vegetarian_protein: Math.floor(Math.random() * 25),
+                sugar: Math.floor(Math.random() * 20),
+              },
+              ingredients: ingredients,
+              unitValue: unitValues,
+              unit: units,
+              steps: meal.strInstructions.split("\r\n.").filter(step => step.trim() !== ""),
+            });
+          }
         } else {
-          console.log("No such document!");
+          // Fetch from Firestore
+          if (source === "private") {
+            docRef = doc(firestore, "users", user.uid, "recipe", id);
+          } else {
+            docRef = doc(firestore, "recipes", id);
+          }
+
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            setRecipe(docSnap.data());
+          } else {
+            console.log("No such document!");
+          }
         }
       } catch (error) {
         console.log(error.message);
       }
     };
     fetchRecipe();
-  }, [id]);
+  }, [id, source, type, user]);
 
   const saveQuantity = () => {
     setModalVisible(false);
@@ -107,8 +193,8 @@ const RecipeDetail = () => {
             />
           </View>
           <Text className="font-psemibold text-xl mt-3">{recipe.name}</Text>
-          <View className="flex flex-row mt-2 justify-between">
-            <View className="w-14 h-20 bg-orange rounded-[10px] items-center justify-center">
+          <View className="flex flex-row mt-2 justify-between space-x-4">
+            <View className="w-14 h-20 bg-orange rounded-[10px] items-center justify-center flex-1">
               <Image
                 source={icons.Time}
                 resizeMode="contain"
@@ -119,7 +205,7 @@ const RecipeDetail = () => {
                 {recipe.time} Menit
               </Text>
             </View>
-            <View className="w-14 h-20 bg-orange rounded-[10px] items-center justify-center">
+            <View className="w-14 h-20 bg-orange rounded-[10px] items-center justify-center flex-1">
               <Image
                 source={icons.MainIngredient}
                 resizeMode="contain"
@@ -130,7 +216,7 @@ const RecipeDetail = () => {
                 {recipe.bahanUtama}
               </Text>
             </View>
-            <View className="w-14 h-20 bg-orange rounded-[10px] items-center justify-center">
+            <View className="w-14 h-20 bg-orange rounded-[10px] items-center justify-center flex-1">
               <Image
                 source={icons.Soup}
                 resizeMode="contain"
@@ -141,7 +227,7 @@ const RecipeDetail = () => {
                 {recipe.jenisMakanan}
               </Text>
             </View>
-            <View className="w-14 h-20 bg-orange rounded-[10px] items-center justify-center">
+            <View className="w-14 h-20 bg-orange rounded-[10px] items-center justify-center flex-1">
               <Image
                 source={icons.Rank}
                 resizeMode="contain"
@@ -248,9 +334,7 @@ const RecipeDetail = () => {
               <View>
                 {recipe.ingredients.map((ingredient, index) => (
                   <Text key={index} className="mt-1">
-                    {`\u2022 ${recipe.unitValue[index] * porsi} ${
-                      recipe.unit[index]
-                    } ${ingredient}`}
+                    {`\u2022 ${isNaN(recipe.unitValue[index] * porsi) ? 1 : recipe.unitValue[index] * porsi} ${recipe.unit[index]} ${ingredient}`}
                   </Text>
                 ))}
               </View>
