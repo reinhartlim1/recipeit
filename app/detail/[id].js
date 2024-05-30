@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
 import { useState, useEffect } from "react";
 import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -133,8 +133,8 @@ const RecipeDetail = () => {
 
   if (!recipe) {
     return (
-      <SafeAreaView>
-        <Text>Loading...</Text>
+      <SafeAreaView className="flex-1 justify-center items-center">
+        <ActivityIndicator size="large" color="green" />
       </SafeAreaView>
     );
   }
@@ -258,7 +258,7 @@ const RecipeDetail = () => {
                   color: selectedTab === "nutrition" ? "green" : "black",
                 }}
               >
-                Informasi Gizi
+                Gizi
               </Text>
               <View
                 style={{
@@ -300,7 +300,7 @@ const RecipeDetail = () => {
                 className="font-pmedium text-xs"
                 style={{ color: selectedTab === "steps" ? "green" : "black" }}
               >
-                Langkah-Langkah
+                Langkah
               </Text>
               <View
                 style={{

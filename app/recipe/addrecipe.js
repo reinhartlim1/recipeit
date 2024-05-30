@@ -416,11 +416,7 @@ const Recipe = () => {
                     setIngredient={(value) =>
                       setIngredientValue(value, index, "ingredient")
                     }
-                    removeIngredient={removeIngredient}
                   />
-                  <TouchableOpacity onPress={() => removeStep(index)}>
-                    <Text className="text-red-500 text-center">Hapus</Text>
-                  </TouchableOpacity>
                 </View>
               ))}
             </View>

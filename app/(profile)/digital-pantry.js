@@ -4,7 +4,8 @@ import {
   Alert,
   TouchableOpacity,
   Image,
-  Modal
+  Modal,
+  ActivityIndicator,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../../components/CustomButton";
@@ -74,8 +75,8 @@ const DigitalPantry = () => {
   
   if (loading) {
     return (
-      <SafeAreaView>
-        <Text>Loading...</Text>
+      <SafeAreaView className="flex-1 justify-center items-center">
+        <ActivityIndicator size="large" color="green" />
       </SafeAreaView>
     );
   }

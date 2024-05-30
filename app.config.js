@@ -38,6 +38,7 @@ export default {
       messagingSenderId: process.env.MESSAGING_SENDER_ID,
       appId: process.env.APP_ID,
       measurementId: process.env.MEASUREMENT_ID,
+      openaiApiKey: process.env.OPENAI_API_KEY,
     },
     plugins: ["expo-router", "expo-image-picker", "expo-camera"],
   },

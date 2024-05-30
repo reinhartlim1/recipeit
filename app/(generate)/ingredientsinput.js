@@ -10,10 +10,10 @@ const IngredientsInput = () => {
   const [ingredients, setIngredients] = useState([""]);
 
   const addIngredientField = () => {
-    if (ingredients.length < 6) {
+    if (ingredients.length < 3) {
       setIngredients([...ingredients, ""]);
     } else {
-      Alert.alert("Maximum 6 ingredients allowed");
+      Alert.alert("Maximum 3 ingredients allowed");
     }
   };
 
@@ -60,6 +60,7 @@ const IngredientsInput = () => {
               text="Generate Resep"
               handlePress={() => {
                 const query = ingredients.join(",");
+                console.log(query);
                 router.push(`/(generate)/result?query=${query}`);
               }}
             />

@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import { useState, useEffect } from "react";
 import { useLocalSearchParams, router } from "expo-router";
@@ -79,13 +80,11 @@ const SearchRecipe = () => {
 
   if (loading) {
     return (
-      <SafeAreaView>
-        <Text>Loading...</Text>
+      <SafeAreaView className="flex-1 justify-center items-center">
+        <ActivityIndicator size="large" color="green" />
       </SafeAreaView>
     );
   }
-
-  console.log(recipes)
 
   return (
     <SafeAreaView>
