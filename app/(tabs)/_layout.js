@@ -23,7 +23,7 @@ const handlePress = () => {
 
 const CustomTabButton = ({ children }) => (
   <TouchableOpacity
-    onPress={handlePress}
+    onPress={() => router.push("/recipe")}
     className="justify-center items-center -top-8"
   >
     <View className="rounded-full h-[70px] w-[70px] bg-green">{children}</View>

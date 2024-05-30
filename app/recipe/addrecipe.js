@@ -214,7 +214,7 @@ const Recipe = () => {
   return (
     <SafeAreaView>
       <View className="flex flex-row items-center justify-between mx-8 mt-8">
-        <TouchableOpacity onPress={() => router.replace("/profile")}>
+        <TouchableOpacity onPress={() => router.replace("/home")}>
           <Image source={icons.Back} resizeMode="contain" className="w-8 h-8" />
         </TouchableOpacity>
         <Text className="text-center flex-1 mr-8 font-pmedium text-xl">

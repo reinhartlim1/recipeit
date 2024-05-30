@@ -120,6 +120,7 @@ const SearchRecipe = () => {
             </View>
           ))}
         </View>
+        <View className="mt-40"></View>
       </ScrollView>
     </SafeAreaView>
   );

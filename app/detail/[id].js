@@ -90,7 +90,7 @@ const RecipeDetail = () => {
               imageUrl: meal.strMealThumb,
               time:60,
               bahanUtama: meal.strCategory,
-              jenisMakanan: tags.charAt(0).toUpperCase() + tags.slice(1) || "",
+              jenisMakanan: tags.charAt(0).toUpperCase() + tags.slice(1) || "Food",
               tingkatKesulitan: "Medium", 
               nutrition: {
                 carbs: Math.floor(Math.random() * 120),

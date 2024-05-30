@@ -5,7 +5,7 @@ import { Stack } from 'expo-router'
 const GenerateLayout = () => {
   return (
     <Stack>
-      <Stack.Screen name="[query]" options={{ headerShown: false }} />
+      <Stack.Screen name="ingredientsinput" options={{ headerShown: false }} />
       <Stack.Screen name="result" options={{ headerShown: false }} />
     </Stack>
   )

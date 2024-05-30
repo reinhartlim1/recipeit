@@ -1,14 +1,13 @@
 import { View, Text, ScrollView, Image, TouchableOpacity, Alert } from "react-native";
 import { useState } from "react";
-import { useLocalSearchParams, router } from "expo-router";
+import { router } from "expo-router";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { icons } from "../../constants";
 
 const IngredientsInput = () => {
-  const { query } = useLocalSearchParams();
-  const [ingredients, setIngredients] = useState([query]);
+  const [ingredients, setIngredients] = useState([""]);
 
   const addIngredientField = () => {
     if (ingredients.length < 6) {
@@ -20,7 +19,7 @@ const IngredientsInput = () => {
 
   return (
     <SafeAreaView>
-      <View className="mx-9 mt-2">
+      <View className="mx-9 mt-8">
         <View className="flex flex-row items-center justify-between">
           <TouchableOpacity onPress={() => router.back()}>
             <Image
