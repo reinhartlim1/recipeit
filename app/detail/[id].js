@@ -8,9 +8,11 @@ import { icons } from "../../constants";
 import { router } from "expo-router";
 import CustomButton from "../../components/CustomButton";
 import QuantityModal from "../../components/QuantityModal";
+import { useGlobalContext } from "../context/GlobalProvider";
 
 const RecipeDetail = () => {
-  const { id } = useLocalSearchParams();
+  const { id, source } = useLocalSearchParams();
+  const { user } = useGlobalContext();
   const [recipe, setRecipe] = useState(null);
   const [selectedTab, setSelectedTab] = useState("nutrition");
   const [porsi, setPorsi] = useState(1);
@@ -19,7 +21,12 @@ const RecipeDetail = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const docRef = doc(firestore, "recipes", id);
+        if (source === "private") {
+          docRef = doc(firestore, "users", user.uid, "recipe", id);
+        } else {
+          docRef = doc(firestore, "recipes", id);
+        }
+
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -36,7 +43,6 @@ const RecipeDetail = () => {
 
   const saveQuantity = () => {
     setModalVisible(false);
-
   };
 
   if (!recipe) {

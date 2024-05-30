@@ -3,7 +3,7 @@ import CustomButton from "./CustomButton";
 import { icons } from "../constants";
 import { router } from "expo-router";
 
-const RecipeCard = ({ id, name, ingCount, time, imageUrl }) => {
+const RecipeCard = ({ id, name, ingCount, time, imageUrl, sourceType }) => {
   return (
     <View>
       <Image
@@ -27,11 +27,16 @@ const RecipeCard = ({ id, name, ingCount, time, imageUrl }) => {
 
       <View className="h-[30px] w-[130px] mt-[10px]">
         <CustomButton
-          handlePress={() => router.push(`/detail/${id}`)}
+          handlePress={() => {
+            sourceType === "private"
+              ? router.push(`/detail/${id}?source=private`)
+              : router.push(`/detail/${id}`);
+          }}
           text="Cek Resep"
           backgroundColor="bg-orange"
           textColor="text-white"
           style={{}}
+          isCard={true}
         />
       </View>
     </View>

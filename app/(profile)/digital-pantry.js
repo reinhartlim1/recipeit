@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  ScrollView,
   Alert,
   TouchableOpacity,
   Image,
@@ -9,7 +8,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../../components/CustomButton";
-import { icons, images } from "../../constants";
+import { icons } from "../../constants";
 import { router } from "expo-router";
 import { useState, useEffect } from "react";
 import { firestore } from "../firebase/firebaseconfig";
