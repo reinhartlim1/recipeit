@@ -109,11 +109,13 @@ const MealPlan = () => {
                               <View className="h-[30px] w-[130px] mt-[10px]">
                                 <CustomButton
                                   handlePress={() => {
-                                    sourceType === "private"
-                                      ? router.push(
-                                          `/detail/${id}?source=private`
-                                        )
-                                      : router.push(`/detail/${id}`);
+                                    router.push(
+                                      meal.type === "private"
+                                        ? `/detail/${meal.id}?source=private`
+                                        : meal.type === "mealdb"
+                                        ? `/detail/${meal.id}?type=mealdb`
+                                        : `/detail/${meal.id}`
+                                    );
                                   }}
                                   text="Cek Resep"
                                   backgroundColor="bg-orange"
