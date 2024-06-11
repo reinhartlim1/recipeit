@@ -114,6 +114,9 @@ const Result = () => {
         await setDoc(recipeRef, {
           ...recipe,
           createdAt: serverTimestamp(),
+          recipetype: "Private",
+          recipeId: recipeRef.id,
+          creator: user.uid,
         }).then(() => {
           Alert.alert("Success", "Recipe saved successfully.");
         });
