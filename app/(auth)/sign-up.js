@@ -5,9 +5,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { auth, firestore } from "../firebase/firebaseconfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
+import Constants from "expo-constants";
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -49,6 +50,10 @@ const SignUp = () => {
           form.email,
           form.password
         );
+        updateProfile(auth.currentUser, {
+          displayName: form.fullName,
+          photoURL: Constants.expoConfig.extra.profileImageUrl,
+        });
 
         const user = userCredential.user;
         createUserProfile(user);

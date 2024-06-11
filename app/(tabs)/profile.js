@@ -2,8 +2,10 @@ import { View, Text, ScrollView, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ProfileNavigation from "../../components/ProfileNavigation";
+import { useGlobalContext } from "../context/GlobalProvider";
 
 const Profile = () => {
+  const { user } = useGlobalContext();
   return (
     <SafeAreaView>
       <View className="bg-green">
@@ -13,10 +15,16 @@ const Profile = () => {
               Akun
             </Text>
           </View>
-          <View className="mt-[20px] h-[130px] w-[130px] bg-white rounded-full"></View>
+          <View className="mt-[20px] h-[130px] w-[130px] bg-white rounded-full">
+            <Image 
+              source={{ uri: user?.photoURL }}
+              className="w-full h-full rounded-full"
+              resizeMode="contain"
+            />
+          </View>
           <View className="mt-[24px] items-center">
             <Text className="font-psemibold text-[18px] text-white">
-              John Doe
+              {user?.displayName}
             </Text>
             <Text className="font-pregular text-[13px] text-white">
               Bandung, West Java
